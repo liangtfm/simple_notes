@@ -1,4 +1,4 @@
-JournalApp.Views.PostShow = Backbone.View.extend({
+JournalApp.Views.PostShowView = Backbone.View.extend({
 
   template: JST['posts/show'],
 

@@ -1,3 +1,4 @@
 JournalApp::Application.routes.draw do
-  resources :posts, only: [:index, :create, :show]
+  root to: 'posts#index'
+  resources :posts, only: [:index, :create, :show, :update]
 end

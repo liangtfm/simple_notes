@@ -1,4 +1,4 @@
-JournalApp.Views.PostsIndex = Backbone.View.extend({
+JournalApp.Views.PostsIndexView = Backbone.View.extend({
 
   initialize: function () {
     var that = this;
