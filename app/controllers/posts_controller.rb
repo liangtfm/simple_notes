@@ -18,4 +18,9 @@ class PostsController < ApplicationController
       render json: @post.errors, status: 422
     end
   end
+
+  def show
+    @post = Post.find(params[:id])
+    render json: @post
+  end
 end

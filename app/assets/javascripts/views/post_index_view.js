@@ -17,6 +17,15 @@ JournalApp.Views.PostsIndex = Backbone.View.extend({
     var content = this.template({ posts: this.collection });
     this.$el.html(content);
     return this; // this is the instance of the view.
+  },
+
+  events: {
+    "click .remove": "removePost"
+
+  },
+
+  removePost: function (event) {
+    console.log(event.currentTarget);
   }
 
 })
