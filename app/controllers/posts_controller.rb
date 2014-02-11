@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+
+    if request.xhr?
+      render json: @posts
+    else
+      render :index
+    end
   end
 
   def create
