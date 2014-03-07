@@ -1,10 +1,10 @@
-JournalApp.Views.PostEditView = Backbone.View.extend({
+JournalApp.Views.PostNewView = Backbone.View.extend({
 
   initialize: function() {
     var that = this;
   },
 
-  template: JST["posts/edit"],
+  template: JST["posts/new"],
 
   render: function () {
     var content = this.template({ post: this.model });
@@ -13,17 +13,18 @@ JournalApp.Views.PostEditView = Backbone.View.extend({
   },
 
   events: {
-    "click .edit": "editPost"
+    "click .create": "newPost"
   },
 
-  editPost: function(event) {
+  newPost: function(event) {
     event.preventDefault();
     var that = this;
 
-    var $form = $("#edit_form");
-    var formData = $form.serializeJSON();
+    var attrs = $(event.target.form).serializeJSON();
 
-    that.model.save(formData, {
+    this.model.set(attrs);
+
+    this.collection.create(this.model, {
       success: function() {
         Backbone.history.navigate("#/");
       },
