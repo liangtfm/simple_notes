@@ -14,34 +14,34 @@ JournalApp.Routers.PostsRouter = Backbone.Router.extend({
 
   index: function() {
     var that = this;
-    var view = new JournalApp.Views.PostsIndexView({
+    var formView = new JournalApp.Views.PostsIndexView({
       collection: that.posts
     });
 
-    that.$rootEl.html(view.render().$el);
+    that._swapView(formView);
   },
 
   new: function() {
   var that = this;
   var newPost = new JournalApp.Models.Post();
 
-  var view = new JournalApp.Views.PostNewView({
+  var formView = new JournalApp.Views.PostNewView({
     model: newPost,
     collection: that.posts
   });
 
-  that.$rootEl.html(view.render().$el);
+    that._swapView(formView);
   },
 
   show: function (id) {
     var that = this;
 
     var post = _(that.posts.models).findWhere({id: parseInt(id) });
-    var show = new JournalApp.Views.PostShowView({
+    var formView = new JournalApp.Views.PostShowView({
       model: post
     })
 
-    that.$rootEl.html(show.render().$el);
+    that._swapView(formView);
   },
 
   edit: function (id) {
@@ -49,11 +49,33 @@ JournalApp.Routers.PostsRouter = Backbone.Router.extend({
 
     var post = _(that.posts.models).findWhere({id: parseInt(id) });
 
-    var form = new JournalApp.Views.PostEditView({
+    var formView = new JournalApp.Views.PostEditView({
       model: post
     })
 
-    that.$rootEl.html(form.render().$el);
+    that._swapView(formView);
+  },
+
+  _getPost: function (id, callback) {
+    var post = JournalApp.posts.get(id);
+    if (!post) {
+      post = new JournalApp.Models.Post({ id: id });
+      post.collection = JournalApp.posts;
+      post.fetch({
+        success: function () {
+          JournalApp.posts.add(post);
+          callback(post);
+        }
+      });
+    } else {
+      callback(post);
+    }
+  },
+
+  _swapView: function (view) {
+    this._currentView && this._currentView.remove();
+    this._currenView = view;
+    this.$rootEl.html(view.render().$el);
   }
 
 });
