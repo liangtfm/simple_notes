@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
+  before_filter :require_signed_in!, :except => [:show]
+
   def index
-    @posts = Post.all
+    @posts = current_user.posts
 
     if request.xhr?
       render json: @posts
@@ -10,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
+    @post = current_user.posts.new(params[:post])
 
     if @post.save
       render json: @post
