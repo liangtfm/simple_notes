@@ -3,7 +3,9 @@ JournalApp::Application.routes.draw do
 
   resources :posts, only: [:index, :create, :show, :update]
 
-  resources :users, :only => [:create, :new, :show, :edit, :update, :index]
+  resources :users, :only => [:create, :new, :show, :edit, :update, :index] do
+    get 'activate'
+  end
 
   resource :session, :only => [:create, :destroy, :new]
 
