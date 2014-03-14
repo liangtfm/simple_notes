@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in(@user)
-      # AuthMailer.signup_email(@user).deliver!
+      AuthMailer.signup_email(@user).deliver!
       redirect_to user_url(@user)
     else
       render :json => @user.errors.full_messages
