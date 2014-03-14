@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :email, :auth_token, :activated, :session_token, :admin, :password_digest, :password
+  attr_accessible :username, :email, :auth_token, :activated, :session_token, :admin, :password_digest, :password, :uid, :provider, :mobile
   attr_reader :password
 
   before_validation :ensure_session_token
@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
                  provider: auth[:provider],
                  username: (auth[:info][:nickname] || auth[:info][:first_name]+rand(1..1000).to_s),
                  email: auth[:info][:email],
-                 image: auth[:info][:image] + "?type=large",
                  password: SecureRandom::urlsafe_base64(16)
                )
       elsif auth[:provider] == 'twitter'
@@ -32,7 +31,6 @@ class User < ActiveRecord::Base
                  provider: auth[:provider],
                  username: auth[:info][:nickname],
                  email: "fillmein@right.meow",
-                 image: auth[:info][:image].gsub("_normal", ""),
                  password: SecureRandom::urlsafe_base64(16)
                )
       else

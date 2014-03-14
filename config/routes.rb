@@ -6,4 +6,6 @@ JournalApp::Application.routes.draw do
   resources :users, :only => [:create, :new, :show, :edit, :update, :index]
 
   resource :session, :only => [:create, :destroy, :new]
+
+  post "inbound/twilio" => "inbound#twilio"
 end

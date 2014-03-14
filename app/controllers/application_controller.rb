@@ -35,4 +35,19 @@ class ApplicationController < ActionController::Base
   def require_auth!
     redirect_to new_session_url unless current_user.activated == true
   end
+
+    def push_post(post)
+    html = render_to_string(partial: "posts/post", locals: {post: post})
+    Pusher.trigger("posts", "post", html)
+  end
+
+  def send_text(receiver, body)
+    twilio = Twilio::REST::Client.new ENV["TWILIO_SID"], ENV["TWILIO_TOKEN"]
+
+    twilio.account.messages.create(
+      from: ENV["TWILIO_NUMBER"],
+      to: receiver,
+      body: body
+    )
+  end
 end

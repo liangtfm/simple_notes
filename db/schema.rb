@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140310191119) do
+ActiveRecord::Schema.define(:version => 20140314175508) do
 
   create_table "posts", :force => true do |t|
     t.string   "title",      :null => false
@@ -33,9 +33,15 @@ ActiveRecord::Schema.define(:version => 20140310191119) do
     t.datetime "updated_at",                         :null => false
     t.string   "session_token"
     t.boolean  "admin",           :default => false
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "mobile"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["mobile"], :name => "index_users_on_mobile"
+  add_index "users", ["provider"], :name => "index_users_on_provider"
+  add_index "users", ["uid"], :name => "index_users_on_uid"
   add_index "users", ["username"], :name => "index_users_on_username"
 
 end

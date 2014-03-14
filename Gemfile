@@ -8,6 +8,8 @@ gem 'backbone-on-rails'
 gem 'jquery-rails'
 
 gem 'figaro'
+gem 'pusher'
+gem 'twilio-ruby'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
