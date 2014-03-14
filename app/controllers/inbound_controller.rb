@@ -7,7 +7,7 @@ class InboundController < ApplicationController
       post = user.posts.create!(title: Time.now, body: params["Body"])
       push_post(post)
 
-      send_text(post.sender, "Note added!")
+      send_text(user.mobile, "Note added!")
 
       head :created
     else
