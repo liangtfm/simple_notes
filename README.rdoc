@@ -1,3 +1,5 @@
 == Welcome!
 
 Journal app built with ruby on rails & backbone.js
+
+If you enter your mobile number in your profile (formatted as '+12345678'), you can text +1 315-625-1479 to create a new note. I used Twilio to enable this and Pusher to add the note instantly to your account.

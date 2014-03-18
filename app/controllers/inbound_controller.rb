@@ -5,11 +5,8 @@ class InboundController < ApplicationController
 
     if user
       post = user.posts.create!(title: Time.now, body: params["Body"])
+      send_text(params["From"], "Note added!")
       push_post(post)
-
-      send_text(user.mobile, "Note added!")
-
-      head :created
     else
       send_text(params["From"], "Account not found, did you update your mobile on your profile?")
     end

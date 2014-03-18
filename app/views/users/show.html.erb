@@ -1,3 +1,6 @@
 Hello, <%= @user.username %>!
+<% if current_user == @user %>
+  <%=link_to "Edit Profile", edit_user_url(@user) %>
+<% end %>
 <br>
-<%=link_to "Notes", posts_url%>
+<%=link_to "Go to my notes!", posts_url%>

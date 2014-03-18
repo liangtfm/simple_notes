@@ -1,9 +1,9 @@
 JournalApp::Application.routes.draw do
   root to: 'sessions#new'
 
-  resources :posts, only: [:index, :create, :show, :update]
+  resources :posts, :only => [:index, :create, :show, :update]
 
-  resources :users, :only => [:create, :new, :show, :edit, :update, :index] do
+  resources :users, :except => [:destroy] do
     get 'activate'
   end
 
