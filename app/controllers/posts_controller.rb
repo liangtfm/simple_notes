@@ -35,4 +35,13 @@ class PostsController < ApplicationController
       render json: @post.errors, status: 422
     end
   end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    if request.xhr?
+      render :index
+    end
+  end
 end

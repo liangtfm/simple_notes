@@ -8,7 +8,6 @@ gem 'backbone-on-rails'
 gem 'jquery-rails'
 
 gem 'figaro'
-gem 'pusher'
 gem 'twilio-ruby'
 
 group :assets do

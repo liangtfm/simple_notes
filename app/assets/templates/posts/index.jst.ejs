@@ -1,10 +1,9 @@
-<a href="#/posts/new">Add new post</a>
+<a href="#/new">Add new post</a>
 
 <ul>
   <% posts.each(function (post) { %>
     <li>
-      <a href="#/posts/<%=post.id%>"><%= post.escape("title") %></a>
-      <button class="remove" data-id="<%= post.id %>">Delete</button>
+      <a href="#/<%=post.id%>"><%= post.escape("title") %></a>
     </li>
   <% }) %>
 </ul>
