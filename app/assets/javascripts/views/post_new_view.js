@@ -20,7 +20,9 @@ JournalApp.Views.PostNewView = Backbone.View.extend({
     event.preventDefault();
     var that = this;
 
+    console.log(event.target.form);
     var attrs = $(event.target.form).serializeJSON();
+
 
     this.model.set(attrs);
 

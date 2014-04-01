@@ -1,26 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Simple Notes</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
-  <ul>
-    <% if signed_in? %>
-      <li>User:
-      <%= link_to current_user.username, user_url(current_user) %>
-      <%= "(admin)" if current_user.admin == true %>
-      </li>
-      <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
-    <% else %>
-      <li><%= link_to "Sign In", new_session_url %></li>
-      <li><%= link_to "Sign up", new_user_url %></li>
-    <% end %>
-  </ul>
+
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Simple Notes</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/posts">Notes</a></li>
+          <% if signed_in? %>
+            <li><a href=<%= user_url(current_user) %>>My Account</a></li>
+            <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
+          <% else %>
+            <li><a href=<%= new_session_url %>>Sign In</a></li>
+            <li><a href=<%= new_user_url %>>Sign Up</a></li>
+          <% end %>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 
 <%= yield %>
+
+  <script>
+    $("li").hover(function() {
+        $(this).addClass("active");
+    }, function() {
+        $(this).removeClass("active");
+    });
+  </script>
+
 
 </body>
 </html>
